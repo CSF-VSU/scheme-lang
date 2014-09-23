@@ -1,0 +1,15 @@
+NIL=9
+NUMBER=6
+T__3=1
+T__2=2
+T__1=3
+CHARACTER=8
+T__0=4
+ID=7
+WS=5
+BOOLEAN=10
+'nil'=9
+')'=4
+'('=3
+'\'('=1
+'(lambda'=2

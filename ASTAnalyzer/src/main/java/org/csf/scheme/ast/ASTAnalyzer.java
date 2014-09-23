@@ -1,4 +1,4 @@
-package org.csf.scheme;
+package org.csf.scheme.ast;
 
 /**
  * Created by agpopikov on 05/09/14.
