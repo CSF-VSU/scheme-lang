@@ -1,1 +1,4 @@
-digraph Scheme { define -> a;define -> LAMBDA;LAMBDA -> ARGS;LAMBDA -> BODY;ARGS -> x;ARGS -> y;ARGS -> z;BODY -> sum;sum -> 1;sum -> 2;sum -> 3;sum -> 4;sum -> LIST;LIST -> 5;LIST -> 6;LIST -> 7; }
+strict graph Scheme {
+ vertex0 [label="PROGRAM: PROGRAM"];vertex1 [label="define: ID"];vertex2 [label="a: ID"];vertex3 [label="0: INTEGER"];vertex4 [label="define: ID"];vertex5 [label="a: ID"];vertex6 [label="0.21: DOUBLE"];vertex7 [label="a: CHAR"];vertex8 [label="hello: STRING"];vertex9 [label="define: ID"];vertex10 [label="b: ID"];vertex11 [label="LAMBDA: LAMBDA"];vertex12 [label="ARGS: ARGS"];vertex13 [label="x: ID"];vertex14 [label="BODY: BODY"];vertex15 [label="sum: ID"];vertex16 [label="x: ID"];vertex17 [label="1: INTEGER"];
+ vertex0 -- vertex1 -- vertex2;vertex0 -- vertex1 -- vertex3;vertex0 -- vertex1 -- vertex4 -- vertex5;vertex0 -- vertex1 -- vertex4 -- vertex6;vertex0 -- vertex1 -- vertex7;vertex0 -- vertex1 -- vertex8;vertex0 -- vertex9 -- vertex10;vertex0 -- vertex9 -- vertex11 -- vertex12 -- vertex13;vertex0 -- vertex9 -- vertex11 -- vertex14 -- vertex15 -- vertex16;vertex0 -- vertex9 -- vertex11 -- vertex14 -- vertex15 -- vertex17;
+ }

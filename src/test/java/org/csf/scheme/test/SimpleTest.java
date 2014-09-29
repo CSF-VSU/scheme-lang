@@ -5,13 +5,12 @@ import org.antlr.runtime.CharStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.tree.Tree;
-import org.antlr.runtime.tree.TreeAdaptor;
 import org.csf.scheme.lang.SchemeLexer;
 import org.csf.scheme.lang.SchemeParser;
 import org.csf.scheme.lang.SchemeTreeWriter;
+import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -20,25 +19,14 @@ import java.io.IOException;
 public class SimpleTest {
 
     @Test
-    public void simple_test() throws RecognitionException, IOException {
-        Tree multiTree = multiTree();
-        Tree simpleTree = simpleTree();
+    public void simple_test() throws RecognitionException, IOException, IllegalAccessException {
+        Tree tree = sampleTree();
         SchemeTreeWriter schemeTreeWriter = new SchemeTreeWriter();
-        schemeTreeWriter.writeTreeToDot(simpleTree, "test.dot");
-        multiTree = null;
+        schemeTreeWriter.writeTreeToDot(tree, "test.dot");
     }
 
-    private Tree multiTree() throws RecognitionException {
-        CharStream input = new ANTLRStringStream("(define a (lambda (x y z) (sum 1 x y z))) (define b 1)"); // (' 1 2 3)
-        SchemeLexer lexer = new SchemeLexer(input);
-        CommonTokenStream tokens = new CommonTokenStream();
-        tokens.setTokenSource(lexer);
-        SchemeParser parser = new SchemeParser(tokens);
-        return (Tree) parser.program().getTree();
-    }
-
-    private Tree simpleTree() throws RecognitionException {
-        CharStream input = new ANTLRStringStream("(define a (lambda (x y z) (sum 1 2 3 4 '(5 6 7))))"); // (' 1 2 3)
+    private Tree sampleTree() throws RecognitionException {
+        CharStream input = new ANTLRStringStream("(define b (lambda (x) (lambda (y) (sum x y)))) (define a 1) (sum 1 2 3)"); // (' 1 2 3)
         SchemeLexer lexer = new SchemeLexer(input);
         CommonTokenStream tokens = new CommonTokenStream();
         tokens.setTokenSource(lexer);
