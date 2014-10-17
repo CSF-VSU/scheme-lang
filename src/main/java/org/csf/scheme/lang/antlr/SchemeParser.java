@@ -1,6 +1,6 @@
-// $ANTLR 3.5.2 src/main/antlr3/Scheme.g 2014-09-29 18:02:59
+// $ANTLR 3.5.2 src/main/antlr3/Scheme.g 2014-10-13 15:16:54
 
-    package org.csf.scheme.lang;
+    package org.csf.scheme.lang.antlr;
 
 
 import org.antlr.runtime.*;
@@ -17,28 +17,29 @@ import org.antlr.runtime.tree.*;
 public class SchemeParser extends Parser {
 	public static final String[] tokenNames = new String[] {
 		"<invalid>", "<EOR>", "<DOWN>", "<UP>", "ARGS", "BODY", "BOOLEAN", "CHAR", 
-		"DOUBLE", "ID", "INTEGER", "LAMBDA", "LIST", "NIL", "PROGRAM", "SIGN", 
-		"STRING", "WS", "'('", "')'", "'\\'('", "'lambda'"
+		"ID", "LAMBDA", "LIST", "NIL", "NUMBER", "PROGRAM", "SIGN", "STRING", 
+		"SYMBOL_HEAD", "SYMBOL_REST", "WS", "'('", "')'", "'\\'('", "'lambda'"
 	};
 	public static final int EOF=-1;
-	public static final int T__18=18;
 	public static final int T__19=19;
 	public static final int T__20=20;
 	public static final int T__21=21;
+	public static final int T__22=22;
 	public static final int ARGS=4;
 	public static final int BODY=5;
 	public static final int BOOLEAN=6;
 	public static final int CHAR=7;
-	public static final int DOUBLE=8;
-	public static final int ID=9;
-	public static final int INTEGER=10;
-	public static final int LAMBDA=11;
-	public static final int LIST=12;
-	public static final int NIL=13;
-	public static final int PROGRAM=14;
-	public static final int SIGN=15;
-	public static final int STRING=16;
-	public static final int WS=17;
+	public static final int ID=8;
+	public static final int LAMBDA=9;
+	public static final int LIST=10;
+	public static final int NIL=11;
+	public static final int NUMBER=12;
+	public static final int PROGRAM=13;
+	public static final int SIGN=14;
+	public static final int STRING=15;
+	public static final int SYMBOL_HEAD=16;
+	public static final int SYMBOL_REST=17;
+	public static final int WS=18;
 
 	// delegates
 	public Parser[] getDelegates() {
@@ -95,7 +96,7 @@ public class SchemeParser extends Parser {
 			while (true) {
 				int alt1=2;
 				int LA1_0 = input.LA(1);
-				if ( (LA1_0==18) ) {
+				if ( (LA1_0==19) ) {
 					alt1=1;
 				}
 
@@ -202,7 +203,7 @@ public class SchemeParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 
 
-			char_literal2=(Token)match(input,18,FOLLOW_18_in_expression128); if (state.failed) return retval;
+			char_literal2=(Token)match(input,19,FOLLOW_19_in_expression128); if (state.failed) return retval;
 			ID3=(Token)match(input,ID,FOLLOW_ID_in_expression131); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
 			ID3_tree = (Object)adaptor.create(ID3);
@@ -214,7 +215,7 @@ public class SchemeParser extends Parser {
 			while (true) {
 				int alt2=2;
 				int LA2_0 = input.LA(1);
-				if ( ((LA2_0 >= BOOLEAN && LA2_0 <= INTEGER)||LA2_0==NIL||LA2_0==STRING||LA2_0==18||LA2_0==20) ) {
+				if ( ((LA2_0 >= BOOLEAN && LA2_0 <= ID)||(LA2_0 >= NIL && LA2_0 <= NUMBER)||LA2_0==STRING||LA2_0==19||LA2_0==21) ) {
 					alt2=1;
 				}
 
@@ -236,7 +237,7 @@ public class SchemeParser extends Parser {
 				}
 			}
 
-			char_literal5=(Token)match(input,19,FOLLOW_19_in_expression139); if (state.failed) return retval;
+			char_literal5=(Token)match(input,20,FOLLOW_20_in_expression139); if (state.failed) return retval;
 			}
 
 			retval.stop = input.LT(-1);
@@ -286,10 +287,10 @@ public class SchemeParser extends Parser {
 			// src/main/antlr3/Scheme.g:36:3: ( lambda | expression | list | ID | literal )
 			int alt3=5;
 			switch ( input.LA(1) ) {
-			case 18:
+			case 19:
 				{
 				int LA3_1 = input.LA(2);
-				if ( (LA3_1==21) ) {
+				if ( (LA3_1==22) ) {
 					alt3=1;
 				}
 				else if ( (LA3_1==ID) ) {
@@ -311,7 +312,7 @@ public class SchemeParser extends Parser {
 
 				}
 				break;
-			case 20:
+			case 21:
 				{
 				alt3=3;
 				}
@@ -323,9 +324,8 @@ public class SchemeParser extends Parser {
 				break;
 			case BOOLEAN:
 			case CHAR:
-			case DOUBLE:
-			case INTEGER:
 			case NIL:
+			case NUMBER:
 			case STRING:
 				{
 				alt3=5;
@@ -459,24 +459,24 @@ public class SchemeParser extends Parser {
 		Object ID14_tree=null;
 		Object char_literal15_tree=null;
 		Object char_literal17_tree=null;
-		RewriteRuleTokenStream stream_18=new RewriteRuleTokenStream(adaptor,"token 18");
+		RewriteRuleTokenStream stream_22=new RewriteRuleTokenStream(adaptor,"token 22");
 		RewriteRuleTokenStream stream_19=new RewriteRuleTokenStream(adaptor,"token 19");
 		RewriteRuleTokenStream stream_ID=new RewriteRuleTokenStream(adaptor,"token ID");
-		RewriteRuleTokenStream stream_21=new RewriteRuleTokenStream(adaptor,"token 21");
+		RewriteRuleTokenStream stream_20=new RewriteRuleTokenStream(adaptor,"token 20");
 		RewriteRuleSubtreeStream stream_arg=new RewriteRuleSubtreeStream(adaptor,"rule arg");
 
 		try {
 			// src/main/antlr3/Scheme.g:43:8: ( '(' 'lambda' '(' ( ID )* ')' arg ')' -> ^( LAMBDA ^( ARGS ( ID )* ) ^( BODY arg ) ) )
 			// src/main/antlr3/Scheme.g:43:10: '(' 'lambda' '(' ( ID )* ')' arg ')'
 			{
-			char_literal11=(Token)match(input,18,FOLLOW_18_in_lambda186); if (state.failed) return retval; 
-			if ( state.backtracking==0 ) stream_18.add(char_literal11);
+			char_literal11=(Token)match(input,19,FOLLOW_19_in_lambda186); if (state.failed) return retval; 
+			if ( state.backtracking==0 ) stream_19.add(char_literal11);
 
-			string_literal12=(Token)match(input,21,FOLLOW_21_in_lambda188); if (state.failed) return retval; 
-			if ( state.backtracking==0 ) stream_21.add(string_literal12);
+			string_literal12=(Token)match(input,22,FOLLOW_22_in_lambda188); if (state.failed) return retval; 
+			if ( state.backtracking==0 ) stream_22.add(string_literal12);
 
-			char_literal13=(Token)match(input,18,FOLLOW_18_in_lambda191); if (state.failed) return retval; 
-			if ( state.backtracking==0 ) stream_18.add(char_literal13);
+			char_literal13=(Token)match(input,19,FOLLOW_19_in_lambda191); if (state.failed) return retval; 
+			if ( state.backtracking==0 ) stream_19.add(char_literal13);
 
 			// src/main/antlr3/Scheme.g:43:28: ( ID )*
 			loop4:
@@ -502,16 +502,16 @@ public class SchemeParser extends Parser {
 				}
 			}
 
-			char_literal15=(Token)match(input,19,FOLLOW_19_in_lambda196); if (state.failed) return retval; 
-			if ( state.backtracking==0 ) stream_19.add(char_literal15);
+			char_literal15=(Token)match(input,20,FOLLOW_20_in_lambda196); if (state.failed) return retval; 
+			if ( state.backtracking==0 ) stream_20.add(char_literal15);
 
 			pushFollow(FOLLOW_arg_in_lambda198);
 			arg16=arg();
 			state._fsp--;
 			if (state.failed) return retval;
 			if ( state.backtracking==0 ) stream_arg.add(arg16.getTree());
-			char_literal17=(Token)match(input,19,FOLLOW_19_in_lambda200); if (state.failed) return retval; 
-			if ( state.backtracking==0 ) stream_19.add(char_literal17);
+			char_literal17=(Token)match(input,20,FOLLOW_20_in_lambda200); if (state.failed) return retval; 
+			if ( state.backtracking==0 ) stream_20.add(char_literal17);
 
 			// AST REWRITE
 			// elements: ID, arg
@@ -604,23 +604,23 @@ public class SchemeParser extends Parser {
 
 		Object string_literal18_tree=null;
 		Object char_literal20_tree=null;
-		RewriteRuleTokenStream stream_19=new RewriteRuleTokenStream(adaptor,"token 19");
 		RewriteRuleTokenStream stream_20=new RewriteRuleTokenStream(adaptor,"token 20");
+		RewriteRuleTokenStream stream_21=new RewriteRuleTokenStream(adaptor,"token 21");
 		RewriteRuleSubtreeStream stream_arg=new RewriteRuleSubtreeStream(adaptor,"rule arg");
 
 		try {
 			// src/main/antlr3/Scheme.g:45:6: ( '\\'(' ( arg )* ')' -> ^( LIST ( arg )* ) )
 			// src/main/antlr3/Scheme.g:45:8: '\\'(' ( arg )* ')'
 			{
-			string_literal18=(Token)match(input,20,FOLLOW_20_in_list228); if (state.failed) return retval; 
-			if ( state.backtracking==0 ) stream_20.add(string_literal18);
+			string_literal18=(Token)match(input,21,FOLLOW_21_in_list228); if (state.failed) return retval; 
+			if ( state.backtracking==0 ) stream_21.add(string_literal18);
 
 			// src/main/antlr3/Scheme.g:45:14: ( arg )*
 			loop5:
 			while (true) {
 				int alt5=2;
 				int LA5_0 = input.LA(1);
-				if ( ((LA5_0 >= BOOLEAN && LA5_0 <= INTEGER)||LA5_0==NIL||LA5_0==STRING||LA5_0==18||LA5_0==20) ) {
+				if ( ((LA5_0 >= BOOLEAN && LA5_0 <= ID)||(LA5_0 >= NIL && LA5_0 <= NUMBER)||LA5_0==STRING||LA5_0==19||LA5_0==21) ) {
 					alt5=1;
 				}
 
@@ -641,8 +641,8 @@ public class SchemeParser extends Parser {
 				}
 			}
 
-			char_literal20=(Token)match(input,19,FOLLOW_19_in_list233); if (state.failed) return retval; 
-			if ( state.backtracking==0 ) stream_19.add(char_literal20);
+			char_literal20=(Token)match(input,20,FOLLOW_20_in_list233); if (state.failed) return retval; 
+			if ( state.backtracking==0 ) stream_20.add(char_literal20);
 
 			// AST REWRITE
 			// elements: arg
@@ -707,7 +707,7 @@ public class SchemeParser extends Parser {
 
 
 	// $ANTLR start "literal"
-	// src/main/antlr3/Scheme.g:47:1: literal : ( INTEGER | NIL | BOOLEAN | DOUBLE | CHAR | STRING );
+	// src/main/antlr3/Scheme.g:47:1: literal : ( NUMBER | NIL | BOOLEAN | CHAR | STRING );
 	public final SchemeParser.literal_return literal() throws RecognitionException {
 		SchemeParser.literal_return retval = new SchemeParser.literal_return();
 		retval.start = input.LT(1);
@@ -719,14 +719,14 @@ public class SchemeParser extends Parser {
 		Object set21_tree=null;
 
 		try {
-			// src/main/antlr3/Scheme.g:48:3: ( INTEGER | NIL | BOOLEAN | DOUBLE | CHAR | STRING )
+			// src/main/antlr3/Scheme.g:48:3: ( NUMBER | NIL | BOOLEAN | CHAR | STRING )
 			// src/main/antlr3/Scheme.g:
 			{
 			root_0 = (Object)adaptor.nil();
 
 
 			set21=input.LT(1);
-			if ( (input.LA(1) >= BOOLEAN && input.LA(1) <= DOUBLE)||input.LA(1)==INTEGER||input.LA(1)==NIL||input.LA(1)==STRING ) {
+			if ( (input.LA(1) >= BOOLEAN && input.LA(1) <= CHAR)||(input.LA(1) >= NIL && input.LA(1) <= NUMBER)||input.LA(1)==STRING ) {
 				input.consume();
 				if ( state.backtracking==0 ) adaptor.addChild(root_0, (Object)adaptor.create(set21));
 				state.errorRecovery=false;
@@ -762,24 +762,24 @@ public class SchemeParser extends Parser {
 
 
 
-	public static final BitSet FOLLOW_expression_in_program107 = new BitSet(new long[]{0x0000000000040002L});
-	public static final BitSet FOLLOW_18_in_expression128 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_ID_in_expression131 = new BitSet(new long[]{0x00000000001D27C0L});
-	public static final BitSet FOLLOW_arg_in_expression135 = new BitSet(new long[]{0x00000000001D27C0L});
-	public static final BitSet FOLLOW_19_in_expression139 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_expression_in_program107 = new BitSet(new long[]{0x0000000000080002L});
+	public static final BitSet FOLLOW_19_in_expression128 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_ID_in_expression131 = new BitSet(new long[]{0x00000000003899C0L});
+	public static final BitSet FOLLOW_arg_in_expression135 = new BitSet(new long[]{0x00000000003899C0L});
+	public static final BitSet FOLLOW_20_in_expression139 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_lambda_in_arg151 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_expression_in_arg157 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_list_in_arg163 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_ID_in_arg169 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_literal_in_arg175 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_18_in_lambda186 = new BitSet(new long[]{0x0000000000200000L});
-	public static final BitSet FOLLOW_21_in_lambda188 = new BitSet(new long[]{0x0000000000040000L});
-	public static final BitSet FOLLOW_18_in_lambda191 = new BitSet(new long[]{0x0000000000080200L});
-	public static final BitSet FOLLOW_ID_in_lambda193 = new BitSet(new long[]{0x0000000000080200L});
-	public static final BitSet FOLLOW_19_in_lambda196 = new BitSet(new long[]{0x00000000001527C0L});
-	public static final BitSet FOLLOW_arg_in_lambda198 = new BitSet(new long[]{0x0000000000080000L});
-	public static final BitSet FOLLOW_19_in_lambda200 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_20_in_list228 = new BitSet(new long[]{0x00000000001D27C0L});
-	public static final BitSet FOLLOW_arg_in_list230 = new BitSet(new long[]{0x00000000001D27C0L});
-	public static final BitSet FOLLOW_19_in_list233 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_19_in_lambda186 = new BitSet(new long[]{0x0000000000400000L});
+	public static final BitSet FOLLOW_22_in_lambda188 = new BitSet(new long[]{0x0000000000080000L});
+	public static final BitSet FOLLOW_19_in_lambda191 = new BitSet(new long[]{0x0000000000100100L});
+	public static final BitSet FOLLOW_ID_in_lambda193 = new BitSet(new long[]{0x0000000000100100L});
+	public static final BitSet FOLLOW_20_in_lambda196 = new BitSet(new long[]{0x00000000002899C0L});
+	public static final BitSet FOLLOW_arg_in_lambda198 = new BitSet(new long[]{0x0000000000100000L});
+	public static final BitSet FOLLOW_20_in_lambda200 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_21_in_list228 = new BitSet(new long[]{0x00000000003899C0L});
+	public static final BitSet FOLLOW_arg_in_list230 = new BitSet(new long[]{0x00000000003899C0L});
+	public static final BitSet FOLLOW_20_in_list233 = new BitSet(new long[]{0x0000000000000002L});
 }

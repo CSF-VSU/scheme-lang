@@ -14,20 +14,21 @@ tokens {
   LAMBDA;
   ARGS;
   BODY;
+  PROGRAM;
 }
 
 @header {
-    package org.csf.scheme.lang;
+    package org.csf.scheme.lang.antlr;
 }
 
 @lexer::header {
-    package org.csf.scheme.lang;
+    package org.csf.scheme.lang.antlr;
 }
 
 
 WS : (' '|'\n'|'\r'|'\t') {$channel=HIDDEN;} ;
 
-program : (expression)* ;
+program : (expression)* -> ^(PROGRAM (expression)*);
 
 expression : '('! ID^ (arg)* ')'! ;
 
@@ -46,8 +47,31 @@ list : '\'(' arg* ')' -> ^(LIST arg*);
 literal
   : NUMBER
   | NIL
+  | BOOLEAN
+  | CHAR
+  | STRING
   ;
 
-NUMBER : '0'..'9'+;
+fragment
+SIGN : '+' | '-';
 
-ID : ('a'..'z' | 'A'..'Z'|'_') ('a'..'z' | 'A'..'Z' | '0'..'9'|'_')*;
+NUMBER : SIGN? ('0'..'9')+ ('.' ('0'..'9')+)? (('e' | 'E') SIGN? ('0'..'9')+)? ;
+
+ID : SYMBOL_HEAD SYMBOL_REST*;
+
+fragment
+SYMBOL_HEAD
+    : SIGN | 'a'..'z' | 'A'..'Z' | '*' | '!'  | '_' | '?' | '>' | '<' | '=' | '$' | '&' ;
+
+fragment
+SYMBOL_REST
+    : SYMBOL_HEAD
+    | '0'..'9'
+    | '.'
+    ;
+
+BOOLEAN : '#t' | '#f';
+
+CHAR : '\'' . '\'';
+
+STRING : '\"' . * '\"';

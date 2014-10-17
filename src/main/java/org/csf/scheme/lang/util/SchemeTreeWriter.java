@@ -1,7 +1,9 @@
-package org.csf.scheme.lang;
+package org.csf.scheme.lang.util;
 
 import org.antlr.runtime.tree.Tree;
+import org.csf.scheme.lang.antlr.SchemeParser;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -28,6 +30,14 @@ public class SchemeTreeWriter {
         outputStreamWriter.close();
     }
 
+    public void writeTreeToPNG(Tree tree, String fileName) throws IOException, IllegalAccessException, InterruptedException {
+        String dotFileName = String.format("%s.dot", fileName);
+        writeTreeToDot(tree, dotFileName);
+        Runtime.getRuntime().exec(String.format("dot -Tpng %s -o %s", dotFileName, fileName));
+        Thread.sleep(500);
+        Runtime.getRuntime().exec(String.format("rm %s", dotFileName));
+    }
+
     private void traverseTree(Tree tree, String currentPath) {
         currentVertexes.add(tree);
         int currentIndex = currentVertexes.size() - 1;
@@ -46,44 +56,22 @@ public class SchemeTreeWriter {
         String result = "";
         for (int i = 0; i < currentVertexes.size(); i++) {
             Tree currentVertex = currentVertexes.get(i);
-            if (getParserTypesValues().get("STRING") == currentVertex.getType()) {
+            if (ParserTypes.getParserTypesValues().get("STRING") == currentVertex.getType()) {
                 String text = currentVertex.getText();
                 text = text.substring(1, text.length() - 1);
                 result += String.format("vertex%d [label=\"%s: %s\"];", i, text,
-                        getParserValuesTypes().get(currentVertex.getType()));
-            } else if (getParserTypesValues().get("CHAR") == currentVertex.getType()) {
+                        ParserTypes.getParserValuesTypes().get(currentVertex.getType()));
+            } else if (ParserTypes.getParserTypesValues().get("CHAR") == currentVertex.getType()) {
                 result += String.format("vertex%d [label=\"%s: %s\"];", i, currentVertex.getText().charAt(1),
-                        getParserValuesTypes().get(currentVertex.getType()));
+                        ParserTypes.getParserValuesTypes().get(currentVertex.getType()));
             } else {
                 result += String.format("vertex%d [label=\"%s: %s\"];", i, currentVertex.getText(),
-                        getParserValuesTypes().get(currentVertex.getType()));
+                        ParserTypes.getParserValuesTypes().get(currentVertex.getType()));
             }
         }
         return result;
     }
 
-    private Map<Integer, String> getParserValuesTypes() throws IllegalAccessException {
-        Map<Integer, String> result = new HashMap<>();
-        SchemeParser schemeParser = new SchemeParser(null);
-        Field[] fields = schemeParser.getClass().getFields();
-        for (Field field : fields) {
-            if (field.getType() == int.class) {
-                result.put(field.getInt(schemeParser), field.getName());
-            }
-        }
-        return result;
-    }
 
-    private Map<String, Integer> getParserTypesValues() throws IllegalAccessException {
-        Map<String, Integer> result = new HashMap<>();
-        SchemeParser schemeParser = new SchemeParser(null);
-        Field[] fields = schemeParser.getClass().getFields();
-        for (Field field : fields) {
-            if (field.getType() == int.class) {
-                result.put(field.getName(), field.getInt(schemeParser));
-            }
-        }
-        return result;
-    }
 
 }
