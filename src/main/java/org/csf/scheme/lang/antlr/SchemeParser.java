@@ -77,8 +77,8 @@ public class SchemeParser extends Parser {
 
 	// $ANTLR start "program"
 	// src/main/antlr3/Scheme.g:31:1: program : ( expression )* -> ^( PROGRAM ( expression )* ) ;
-	public final program_return program() throws RecognitionException {
-		program_return retval = new program_return();
+	public final SchemeParser.program_return program() throws RecognitionException {
+		SchemeParser.program_return retval = new SchemeParser.program_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
@@ -181,8 +181,8 @@ public class SchemeParser extends Parser {
 
 	// $ANTLR start "expression"
 	// src/main/antlr3/Scheme.g:33:1: expression : '(' ! ID ^ ( arg )* ')' !;
-	public final expression_return expression() throws RecognitionException {
-		expression_return retval = new expression_return();
+	public final SchemeParser.expression_return expression() throws RecognitionException {
+		SchemeParser.expression_return retval = new SchemeParser.expression_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
@@ -269,8 +269,8 @@ public class SchemeParser extends Parser {
 
 	// $ANTLR start "arg"
 	// src/main/antlr3/Scheme.g:35:1: arg : ( lambda | expression | list | ID | literal );
-	public final arg_return arg() throws RecognitionException {
-		arg_return retval = new arg_return();
+	public final SchemeParser.arg_return arg() throws RecognitionException {
+		SchemeParser.arg_return retval = new SchemeParser.arg_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
@@ -439,8 +439,8 @@ public class SchemeParser extends Parser {
 
 	// $ANTLR start "lambda"
 	// src/main/antlr3/Scheme.g:43:1: lambda : '(' 'lambda' '(' ( ID )* ')' arg ')' -> ^( LAMBDA ^( ARGS ( ID )* ) ^( BODY arg ) ) ;
-	public final lambda_return lambda() throws RecognitionException {
-		lambda_return retval = new lambda_return();
+	public final SchemeParser.lambda_return lambda() throws RecognitionException {
+		SchemeParser.lambda_return retval = new SchemeParser.lambda_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
@@ -592,8 +592,8 @@ public class SchemeParser extends Parser {
 
 	// $ANTLR start "list"
 	// src/main/antlr3/Scheme.g:45:1: list : '\\'(' ( arg )* ')' -> ^( LIST ( arg )* ) ;
-	public final list_return list() throws RecognitionException {
-		list_return retval = new list_return();
+	public final SchemeParser.list_return list() throws RecognitionException {
+		SchemeParser.list_return retval = new SchemeParser.list_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
@@ -708,8 +708,8 @@ public class SchemeParser extends Parser {
 
 	// $ANTLR start "literal"
 	// src/main/antlr3/Scheme.g:47:1: literal : ( NUMBER | NIL | BOOLEAN | CHAR | STRING );
-	public final literal_return literal() throws RecognitionException {
-		literal_return retval = new literal_return();
+	public final SchemeParser.literal_return literal() throws RecognitionException {
+		SchemeParser.literal_return retval = new SchemeParser.literal_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
