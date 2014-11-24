@@ -11,10 +11,8 @@ import scala.io.Source
  */
 class Parser(val src: String) {
 
-
-
   def getParsedTree(): Tree = {
-
+    null
   }
 
 }

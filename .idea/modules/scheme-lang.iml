@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module external.linked.project.id="scheme-lang" external.linked.project.path="$MODULE_DIR$/../.." external.root.project.path="$MODULE_DIR$/../.." external.system.id="SBT" type="JAVA_MODULE" version="4">
-  <component name="FacetManager" />
   <component name="NewModuleRootManager" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/../../target/scala-2.10/classes" />
     <output-test url="file://$MODULE_DIR$/../../target/scala-2.10/test-classes" />
@@ -25,19 +24,19 @@
     <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang:scala-reflect:2.11.2" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang.modules:scala-xml_2.11:1.0.2" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: org.scalatest:scalatest_2.11:2.2.1" level="project" />
-    <orderEntry type="library" name="SBT: antlr:antlr:2.7.7" level="project" />
-    <orderEntry type="library" name="SBT: org.antlr:antlr-runtime:3.4" level="project" />
-    <orderEntry type="library" name="SBT: org.antlr:stringtemplate:3.2.1" level="project" />
+    <orderEntry type="library" name="SBT: org.scala-lang:scala-library:2.10.4" level="project" />
+    <orderEntry type="library" name="SBT: org.abego.treelayout:org.abego.treelayout.core:1.0.1" level="project" />
+    <orderEntry type="library" name="SBT: org.antlr:antlr4-annotations:4.3" level="project" />
+    <orderEntry type="library" name="SBT: org.antlr:antlr4-runtime:4.3" level="project" />
     <orderEntry type="module-library">
       <library name="SBT: unmanaged-jars">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../lib/antlr-3.5.2-complete.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../lib/antlr-4.4-complete.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="SBT: org.scala-lang:scala-library:2.10.4" level="project" />
   </component>
 </module>
-

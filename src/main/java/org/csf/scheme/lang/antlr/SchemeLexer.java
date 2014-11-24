@@ -1,899 +1,115 @@
-// $ANTLR 3.5.2 src/main/antlr/Scheme.g 2014-11-22 03:10:53
+// Generated from src/main/antlr/Scheme.g4 by ANTLR 4.4
 
     package org.csf.scheme.lang.antlr;
 
+import org.antlr.v4.runtime.Lexer;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.TokenStream;
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.atn.*;
+import org.antlr.v4.runtime.dfa.DFA;
+import org.antlr.v4.runtime.misc.*;
 
-import org.antlr.runtime.*;
-import java.util.Stack;
-import java.util.List;
-import java.util.ArrayList;
-
-@SuppressWarnings("all")
+@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class SchemeLexer extends Lexer {
-	public static final int EOF=-1;
-	public static final int T__20=20;
-	public static final int T__21=21;
-	public static final int T__22=22;
-	public static final int T__23=23;
-	public static final int ARGS=4;
-	public static final int BODY=5;
-	public static final int BOOLEAN=6;
-	public static final int CHAR=7;
-	public static final int COMMENT=8;
-	public static final int ID=9;
-	public static final int LAMBDA=10;
-	public static final int LIST=11;
-	public static final int NIL=12;
-	public static final int NUMBER=13;
-	public static final int PROGRAM=14;
-	public static final int SIGN=15;
-	public static final int STRING=16;
-	public static final int SYMBOL_HEAD=17;
-	public static final int SYMBOL_REST=18;
-	public static final int WS=19;
-
-	// delegates
-	// delegators
-	public Lexer[] getDelegates() {
-		return new Lexer[] {};
-	}
-
-	public SchemeLexer() {} 
-	public SchemeLexer(CharStream input) {
-		this(input, new RecognizerSharedState());
-	}
-	public SchemeLexer(CharStream input, RecognizerSharedState state) {
-		super(input,state);
-	}
-	@Override public String getGrammarFileName() { return "src/main/antlr/Scheme.g"; }
-
-	// $ANTLR start "NIL"
-	public final void mNIL() throws RecognitionException {
-		try {
-			int _type = NIL;
-			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/main/antlr/Scheme.g:6:5: ( 'nil' )
-			// src/main/antlr/Scheme.g:6:7: 'nil'
-			{
-			match("nil"); 
-
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "NIL"
-
-	// $ANTLR start "T__20"
-	public final void mT__20() throws RecognitionException {
-		try {
-			int _type = T__20;
-			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/main/antlr/Scheme.g:7:7: ( '(' )
-			// src/main/antlr/Scheme.g:7:9: '('
-			{
-			match('('); 
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "T__20"
-
-	// $ANTLR start "T__21"
-	public final void mT__21() throws RecognitionException {
-		try {
-			int _type = T__21;
-			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/main/antlr/Scheme.g:8:7: ( ')' )
-			// src/main/antlr/Scheme.g:8:9: ')'
-			{
-			match(')'); 
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "T__21"
-
-	// $ANTLR start "T__22"
-	public final void mT__22() throws RecognitionException {
-		try {
-			int _type = T__22;
-			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/main/antlr/Scheme.g:9:7: ( '\\'(' )
-			// src/main/antlr/Scheme.g:9:9: '\\'('
-			{
-			match("'("); 
-
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "T__22"
-
-	// $ANTLR start "T__23"
-	public final void mT__23() throws RecognitionException {
-		try {
-			int _type = T__23;
-			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/main/antlr/Scheme.g:10:7: ( 'lambda' )
-			// src/main/antlr/Scheme.g:10:9: 'lambda'
-			{
-			match("lambda"); 
-
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "T__23"
-
-	// $ANTLR start "WS"
-	public final void mWS() throws RecognitionException {
-		try {
-			int _type = WS;
-			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/main/antlr/Scheme.g:28:4: ( ( ' ' | '\\n' | '\\r' | '\\t' ) )
-			// src/main/antlr/Scheme.g:28:6: ( ' ' | '\\n' | '\\r' | '\\t' )
-			{
-			if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
-				input.consume();
-			}
-			else {
-				MismatchedSetException mse = new MismatchedSetException(null,input);
-				recover(mse);
-				throw mse;
-			}
-			_channel=HIDDEN;
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "WS"
-
-	// $ANTLR start "COMMENT"
-	public final void mCOMMENT() throws RecognitionException {
-		try {
-			int _type = COMMENT;
-			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/main/antlr/Scheme.g:29:9: ( ( ';' (~ ( '\\r' | '\\n' ) )* ) )
-			// src/main/antlr/Scheme.g:29:11: ( ';' (~ ( '\\r' | '\\n' ) )* )
-			{
-			// src/main/antlr/Scheme.g:29:11: ( ';' (~ ( '\\r' | '\\n' ) )* )
-			// src/main/antlr/Scheme.g:29:12: ';' (~ ( '\\r' | '\\n' ) )*
-			{
-			match(';'); 
-			// src/main/antlr/Scheme.g:29:16: (~ ( '\\r' | '\\n' ) )*
-			loop1:
-			while (true) {
-				int alt1=2;
-				int LA1_0 = input.LA(1);
-				if ( ((LA1_0 >= '\u0000' && LA1_0 <= '\t')||(LA1_0 >= '\u000B' && LA1_0 <= '\f')||(LA1_0 >= '\u000E' && LA1_0 <= '\uFFFF')) ) {
-					alt1=1;
-				}
-
-				switch (alt1) {
-				case 1 :
-					// src/main/antlr/Scheme.g:
-					{
-					if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '\t')||(input.LA(1) >= '\u000B' && input.LA(1) <= '\f')||(input.LA(1) >= '\u000E' && input.LA(1) <= '\uFFFF') ) {
-						input.consume();
-					}
-					else {
-						MismatchedSetException mse = new MismatchedSetException(null,input);
-						recover(mse);
-						throw mse;
-					}
-					}
-					break;
-
-				default :
-					break loop1;
-				}
-			}
-
-			}
-
-			_channel=HIDDEN;
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "COMMENT"
-
-	// $ANTLR start "SIGN"
-	public final void mSIGN() throws RecognitionException {
-		try {
-			// src/main/antlr/Scheme.g:57:6: ( '+' | '-' )
-			// src/main/antlr/Scheme.g:
-			{
-			if ( input.LA(1)=='+'||input.LA(1)=='-' ) {
-				input.consume();
-			}
-			else {
-				MismatchedSetException mse = new MismatchedSetException(null,input);
-				recover(mse);
-				throw mse;
-			}
-			}
-
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "SIGN"
-
-	// $ANTLR start "NUMBER"
-	public final void mNUMBER() throws RecognitionException {
-		try {
-			int _type = NUMBER;
-			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/main/antlr/Scheme.g:58:8: ( ( SIGN )? ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )? ( ( 'e' | 'E' ) ( SIGN )? ( '0' .. '9' )+ )? )
-			// src/main/antlr/Scheme.g:58:10: ( SIGN )? ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )? ( ( 'e' | 'E' ) ( SIGN )? ( '0' .. '9' )+ )?
-			{
-			// src/main/antlr/Scheme.g:58:10: ( SIGN )?
-			int alt2=2;
-			int LA2_0 = input.LA(1);
-			if ( (LA2_0=='+'||LA2_0=='-') ) {
-				alt2=1;
-			}
-			switch (alt2) {
-				case 1 :
-					// src/main/antlr/Scheme.g:
-					{
-					if ( input.LA(1)=='+'||input.LA(1)=='-' ) {
-						input.consume();
-					}
-					else {
-						MismatchedSetException mse = new MismatchedSetException(null,input);
-						recover(mse);
-						throw mse;
-					}
-					}
-					break;
-
-			}
-
-			// src/main/antlr/Scheme.g:58:16: ( '0' .. '9' )+
-			int cnt3=0;
-			loop3:
-			while (true) {
-				int alt3=2;
-				int LA3_0 = input.LA(1);
-				if ( ((LA3_0 >= '0' && LA3_0 <= '9')) ) {
-					alt3=1;
-				}
-
-				switch (alt3) {
-				case 1 :
-					// src/main/antlr/Scheme.g:
-					{
-					if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
-						input.consume();
-					}
-					else {
-						MismatchedSetException mse = new MismatchedSetException(null,input);
-						recover(mse);
-						throw mse;
-					}
-					}
-					break;
-
-				default :
-					if ( cnt3 >= 1 ) break loop3;
-					EarlyExitException eee = new EarlyExitException(3, input);
-					throw eee;
-				}
-				cnt3++;
-			}
-
-			// src/main/antlr/Scheme.g:58:28: ( '.' ( '0' .. '9' )+ )?
-			int alt5=2;
-			int LA5_0 = input.LA(1);
-			if ( (LA5_0=='.') ) {
-				alt5=1;
-			}
-			switch (alt5) {
-				case 1 :
-					// src/main/antlr/Scheme.g:58:29: '.' ( '0' .. '9' )+
-					{
-					match('.'); 
-					// src/main/antlr/Scheme.g:58:33: ( '0' .. '9' )+
-					int cnt4=0;
-					loop4:
-					while (true) {
-						int alt4=2;
-						int LA4_0 = input.LA(1);
-						if ( ((LA4_0 >= '0' && LA4_0 <= '9')) ) {
-							alt4=1;
-						}
-
-						switch (alt4) {
-						case 1 :
-							// src/main/antlr/Scheme.g:
-							{
-							if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
-								input.consume();
-							}
-							else {
-								MismatchedSetException mse = new MismatchedSetException(null,input);
-								recover(mse);
-								throw mse;
-							}
-							}
-							break;
-
-						default :
-							if ( cnt4 >= 1 ) break loop4;
-							EarlyExitException eee = new EarlyExitException(4, input);
-							throw eee;
-						}
-						cnt4++;
-					}
-
-					}
-					break;
-
-			}
-
-			// src/main/antlr/Scheme.g:58:47: ( ( 'e' | 'E' ) ( SIGN )? ( '0' .. '9' )+ )?
-			int alt8=2;
-			int LA8_0 = input.LA(1);
-			if ( (LA8_0=='E'||LA8_0=='e') ) {
-				alt8=1;
-			}
-			switch (alt8) {
-				case 1 :
-					// src/main/antlr/Scheme.g:58:48: ( 'e' | 'E' ) ( SIGN )? ( '0' .. '9' )+
-					{
-					if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
-						input.consume();
-					}
-					else {
-						MismatchedSetException mse = new MismatchedSetException(null,input);
-						recover(mse);
-						throw mse;
-					}
-					// src/main/antlr/Scheme.g:58:60: ( SIGN )?
-					int alt6=2;
-					int LA6_0 = input.LA(1);
-					if ( (LA6_0=='+'||LA6_0=='-') ) {
-						alt6=1;
-					}
-					switch (alt6) {
-						case 1 :
-							// src/main/antlr/Scheme.g:
-							{
-							if ( input.LA(1)=='+'||input.LA(1)=='-' ) {
-								input.consume();
-							}
-							else {
-								MismatchedSetException mse = new MismatchedSetException(null,input);
-								recover(mse);
-								throw mse;
-							}
-							}
-							break;
-
-					}
-
-					// src/main/antlr/Scheme.g:58:66: ( '0' .. '9' )+
-					int cnt7=0;
-					loop7:
-					while (true) {
-						int alt7=2;
-						int LA7_0 = input.LA(1);
-						if ( ((LA7_0 >= '0' && LA7_0 <= '9')) ) {
-							alt7=1;
-						}
-
-						switch (alt7) {
-						case 1 :
-							// src/main/antlr/Scheme.g:
-							{
-							if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
-								input.consume();
-							}
-							else {
-								MismatchedSetException mse = new MismatchedSetException(null,input);
-								recover(mse);
-								throw mse;
-							}
-							}
-							break;
-
-						default :
-							if ( cnt7 >= 1 ) break loop7;
-							EarlyExitException eee = new EarlyExitException(7, input);
-							throw eee;
-						}
-						cnt7++;
-					}
-
-					}
-					break;
-
-			}
-
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "NUMBER"
-
-	// $ANTLR start "ID"
-	public final void mID() throws RecognitionException {
-		try {
-			int _type = ID;
-			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/main/antlr/Scheme.g:60:4: ( SYMBOL_HEAD ( SYMBOL_REST )* )
-			// src/main/antlr/Scheme.g:60:6: SYMBOL_HEAD ( SYMBOL_REST )*
-			{
-			mSYMBOL_HEAD(); 
-
-			// src/main/antlr/Scheme.g:60:18: ( SYMBOL_REST )*
-			loop9:
-			while (true) {
-				int alt9=2;
-				int LA9_0 = input.LA(1);
-				if ( (LA9_0=='!'||LA9_0=='$'||LA9_0=='&'||(LA9_0 >= '*' && LA9_0 <= '+')||(LA9_0 >= '-' && LA9_0 <= '.')||(LA9_0 >= '0' && LA9_0 <= '9')||(LA9_0 >= '<' && LA9_0 <= '?')||(LA9_0 >= 'A' && LA9_0 <= 'Z')||LA9_0=='_'||(LA9_0 >= 'a' && LA9_0 <= 'z')) ) {
-					alt9=1;
-				}
-
-				switch (alt9) {
-				case 1 :
-					// src/main/antlr/Scheme.g:
-					{
-					if ( input.LA(1)=='!'||input.LA(1)=='$'||input.LA(1)=='&'||(input.LA(1) >= '*' && input.LA(1) <= '+')||(input.LA(1) >= '-' && input.LA(1) <= '.')||(input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= '<' && input.LA(1) <= '?')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
-						input.consume();
-					}
-					else {
-						MismatchedSetException mse = new MismatchedSetException(null,input);
-						recover(mse);
-						throw mse;
-					}
-					}
-					break;
-
-				default :
-					break loop9;
-				}
-			}
-
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "ID"
-
-	// $ANTLR start "SYMBOL_HEAD"
-	public final void mSYMBOL_HEAD() throws RecognitionException {
-		try {
-			// src/main/antlr/Scheme.g:65:5: ( SIGN | 'a' .. 'z' | 'A' .. 'Z' | '*' | '!' | '_' | '?' | '>' | '<' | '=' | '$' | '&' )
-			// src/main/antlr/Scheme.g:
-			{
-			if ( input.LA(1)=='!'||input.LA(1)=='$'||input.LA(1)=='&'||(input.LA(1) >= '*' && input.LA(1) <= '+')||input.LA(1)=='-'||(input.LA(1) >= '<' && input.LA(1) <= '?')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
-				input.consume();
-			}
-			else {
-				MismatchedSetException mse = new MismatchedSetException(null,input);
-				recover(mse);
-				throw mse;
-			}
-			}
-
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "SYMBOL_HEAD"
-
-	// $ANTLR start "SYMBOL_REST"
-	public final void mSYMBOL_REST() throws RecognitionException {
-		try {
-			// src/main/antlr/Scheme.g:69:5: ( SYMBOL_HEAD | '0' .. '9' | '.' )
-			// src/main/antlr/Scheme.g:
-			{
-			if ( input.LA(1)=='!'||input.LA(1)=='$'||input.LA(1)=='&'||(input.LA(1) >= '*' && input.LA(1) <= '+')||(input.LA(1) >= '-' && input.LA(1) <= '.')||(input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= '<' && input.LA(1) <= '?')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
-				input.consume();
-			}
-			else {
-				MismatchedSetException mse = new MismatchedSetException(null,input);
-				recover(mse);
-				throw mse;
-			}
-			}
-
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "SYMBOL_REST"
-
-	// $ANTLR start "BOOLEAN"
-	public final void mBOOLEAN() throws RecognitionException {
-		try {
-			int _type = BOOLEAN;
-			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/main/antlr/Scheme.g:73:9: ( '#t' | '#f' )
-			int alt10=2;
-			int LA10_0 = input.LA(1);
-			if ( (LA10_0=='#') ) {
-				int LA10_1 = input.LA(2);
-				if ( (LA10_1=='t') ) {
-					alt10=1;
-				}
-				else if ( (LA10_1=='f') ) {
-					alt10=2;
-				}
-
-				else {
-					int nvaeMark = input.mark();
-					try {
-						input.consume();
-						NoViableAltException nvae =
-							new NoViableAltException("", 10, 1, input);
-						throw nvae;
-					} finally {
-						input.rewind(nvaeMark);
-					}
-				}
-
-			}
-
-			else {
-				NoViableAltException nvae =
-					new NoViableAltException("", 10, 0, input);
-				throw nvae;
-			}
-
-			switch (alt10) {
-				case 1 :
-					// src/main/antlr/Scheme.g:73:11: '#t'
-					{
-					match("#t"); 
-
-					}
-					break;
-				case 2 :
-					// src/main/antlr/Scheme.g:73:18: '#f'
-					{
-					match("#f"); 
-
-					}
-					break;
-
-			}
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "BOOLEAN"
-
-	// $ANTLR start "CHAR"
-	public final void mCHAR() throws RecognitionException {
-		try {
-			int _type = CHAR;
-			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/main/antlr/Scheme.g:75:6: ( '\\'' . '\\'' )
-			// src/main/antlr/Scheme.g:75:8: '\\'' . '\\''
-			{
-			match('\''); 
-			matchAny(); 
-			match('\''); 
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "CHAR"
-
-	// $ANTLR start "STRING"
-	public final void mSTRING() throws RecognitionException {
-		try {
-			int _type = STRING;
-			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/main/antlr/Scheme.g:77:8: ( '\\\"' ( . )* '\\\"' )
-			// src/main/antlr/Scheme.g:77:10: '\\\"' ( . )* '\\\"'
-			{
-			match('\"'); 
-			// src/main/antlr/Scheme.g:77:15: ( . )*
-			loop11:
-			while (true) {
-				int alt11=2;
-				int LA11_0 = input.LA(1);
-				if ( (LA11_0=='\"') ) {
-					alt11=2;
-				}
-				else if ( ((LA11_0 >= '\u0000' && LA11_0 <= '!')||(LA11_0 >= '#' && LA11_0 <= '\uFFFF')) ) {
-					alt11=1;
-				}
-
-				switch (alt11) {
-				case 1 :
-					// src/main/antlr/Scheme.g:77:15: .
-					{
-					matchAny(); 
-					}
-					break;
-
-				default :
-					break loop11;
-				}
-			}
-
-			match('\"'); 
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "STRING"
-
-	@Override
-	public void mTokens() throws RecognitionException {
-		// src/main/antlr/Scheme.g:1:8: ( NIL | T__20 | T__21 | T__22 | T__23 | WS | COMMENT | NUMBER | ID | BOOLEAN | CHAR | STRING )
-		int alt12=12;
-		alt12 = dfa12.predict(input);
-		switch (alt12) {
-			case 1 :
-				// src/main/antlr/Scheme.g:1:10: NIL
-				{
-				mNIL(); 
-
-				}
-				break;
-			case 2 :
-				// src/main/antlr/Scheme.g:1:14: T__20
-				{
-				mT__20(); 
-
-				}
-				break;
-			case 3 :
-				// src/main/antlr/Scheme.g:1:20: T__21
-				{
-				mT__21(); 
-
-				}
-				break;
-			case 4 :
-				// src/main/antlr/Scheme.g:1:26: T__22
-				{
-				mT__22(); 
-
-				}
-				break;
-			case 5 :
-				// src/main/antlr/Scheme.g:1:32: T__23
-				{
-				mT__23(); 
-
-				}
-				break;
-			case 6 :
-				// src/main/antlr/Scheme.g:1:38: WS
-				{
-				mWS(); 
-
-				}
-				break;
-			case 7 :
-				// src/main/antlr/Scheme.g:1:41: COMMENT
-				{
-				mCOMMENT(); 
-
-				}
-				break;
-			case 8 :
-				// src/main/antlr/Scheme.g:1:49: NUMBER
-				{
-				mNUMBER(); 
-
-				}
-				break;
-			case 9 :
-				// src/main/antlr/Scheme.g:1:56: ID
-				{
-				mID(); 
-
-				}
-				break;
-			case 10 :
-				// src/main/antlr/Scheme.g:1:59: BOOLEAN
-				{
-				mBOOLEAN(); 
-
-				}
-				break;
-			case 11 :
-				// src/main/antlr/Scheme.g:1:67: CHAR
-				{
-				mCHAR(); 
-
-				}
-				break;
-			case 12 :
-				// src/main/antlr/Scheme.g:1:72: STRING
-				{
-				mSTRING(); 
-
-				}
-				break;
-
-		}
-	}
-
-
-	protected DFA12 dfa12 = new DFA12(this);
-	static final String DFA12_eotS =
-		"\1\uffff\1\12\3\uffff\1\12\2\uffff\1\12\4\uffff\1\12\1\23\1\uffff\1\12"+
-		"\1\11\1\27\1\uffff\3\12\1\uffff\1\12\1\11\1\12\1\11\1\12\1\36\1\uffff";
-	static final String DFA12_eofS =
-		"\37\uffff";
-	static final String DFA12_minS =
-		"\1\11\1\151\2\uffff\1\0\1\141\2\uffff\1\60\4\uffff\1\154\1\47\1\uffff"+
-		"\1\155\2\41\1\uffff\1\142\1\60\1\53\1\uffff\1\144\1\41\1\60\1\41\1\141"+
-		"\1\41\1\uffff";
-	static final String DFA12_maxS =
-		"\1\172\1\151\2\uffff\1\uffff\1\141\2\uffff\1\71\4\uffff\1\154\1\47\1\uffff"+
-		"\1\155\2\172\1\uffff\1\142\2\71\1\uffff\1\144\1\172\1\71\1\172\1\141\1"+
-		"\172\1\uffff";
-	static final String DFA12_acceptS =
-		"\2\uffff\1\2\1\3\2\uffff\1\6\1\7\1\uffff\1\10\1\11\1\12\1\14\2\uffff\1"+
-		"\13\3\uffff\1\4\3\uffff\1\1\6\uffff\1\5";
-	static final String DFA12_specialS =
-		"\4\uffff\1\0\32\uffff}>";
-	static final String[] DFA12_transitionS = {
-			"\2\6\2\uffff\1\6\22\uffff\1\6\1\12\1\14\1\13\1\12\1\uffff\1\12\1\4\1"+
-			"\2\1\3\1\12\1\10\1\uffff\1\10\2\uffff\12\11\1\uffff\1\7\4\12\1\uffff"+
-			"\32\12\4\uffff\1\12\1\uffff\13\12\1\5\1\12\1\1\14\12",
-			"\1\15",
-			"",
-			"",
-			"\50\17\1\16\uffd7\17",
-			"\1\20",
-			"",
-			"",
-			"\12\21",
-			"",
-			"",
-			"",
-			"",
-			"\1\22",
-			"\1\17",
-			"",
-			"\1\24",
-			"\1\12\2\uffff\1\12\1\uffff\1\12\3\uffff\2\12\1\uffff\1\12\1\25\1\uffff"+
-			"\12\21\2\uffff\4\12\1\uffff\4\12\1\26\25\12\4\uffff\1\12\1\uffff\4\12"+
-			"\1\26\25\12",
-			"\1\12\2\uffff\1\12\1\uffff\1\12\3\uffff\2\12\1\uffff\2\12\1\uffff\12"+
-			"\12\2\uffff\4\12\1\uffff\32\12\4\uffff\1\12\1\uffff\32\12",
-			"",
-			"\1\30",
-			"\12\31",
-			"\1\32\1\uffff\1\32\2\uffff\12\33",
-			"",
-			"\1\34",
-			"\1\12\2\uffff\1\12\1\uffff\1\12\3\uffff\2\12\1\uffff\2\12\1\uffff\12"+
-			"\31\2\uffff\4\12\1\uffff\4\12\1\26\25\12\4\uffff\1\12\1\uffff\4\12\1"+
-			"\26\25\12",
-			"\12\33",
-			"\1\12\2\uffff\1\12\1\uffff\1\12\3\uffff\2\12\1\uffff\2\12\1\uffff\12"+
-			"\33\2\uffff\4\12\1\uffff\32\12\4\uffff\1\12\1\uffff\32\12",
-			"\1\35",
-			"\1\12\2\uffff\1\12\1\uffff\1\12\3\uffff\2\12\1\uffff\2\12\1\uffff\12"+
-			"\12\2\uffff\4\12\1\uffff\32\12\4\uffff\1\12\1\uffff\32\12",
-			""
+	static { RuntimeMetaData.checkVersion("4.4", RuntimeMetaData.VERSION); }
+
+	protected static final DFA[] _decisionToDFA;
+	protected static final PredictionContextCache _sharedContextCache =
+		new PredictionContextCache();
+	public static final int
+		PROGRAM=1, EXPRESSION=2, LIST=3, LITERAL=4, NUMBER=5, ID=6, BOOLEAN=7, 
+		CHAR=8, STRING=9, NIL=10, WS=11, COMMENT=12;
+	public static String[] modeNames = {
+		"DEFAULT_MODE"
 	};
 
-	static final short[] DFA12_eot = DFA.unpackEncodedString(DFA12_eotS);
-	static final short[] DFA12_eof = DFA.unpackEncodedString(DFA12_eofS);
-	static final char[] DFA12_min = DFA.unpackEncodedStringToUnsignedChars(DFA12_minS);
-	static final char[] DFA12_max = DFA.unpackEncodedStringToUnsignedChars(DFA12_maxS);
-	static final short[] DFA12_accept = DFA.unpackEncodedString(DFA12_acceptS);
-	static final short[] DFA12_special = DFA.unpackEncodedString(DFA12_specialS);
-	static final short[][] DFA12_transition;
+	public static final String[] tokenNames = {
+		"'\\u0000'", "'\\u0001'", "'\\u0002'", "'\\u0003'", "'\\u0004'", "'\\u0005'", 
+		"'\\u0006'", "'\\u0007'", "'\b'", "'\t'", "'\n'", "'\\u000B'", "'\f'"
+	};
+	public static final String[] ruleNames = {
+		"PROGRAM", "EXPRESSION", "LIST", "LITERAL", "SIGN", "NUMBER", "ID", "SYMBOL_HEAD", 
+		"SYMBOL_REST", "BOOLEAN", "CHAR", "STRING", "NIL", "WS", "COMMENT"
+	};
 
+
+	public SchemeLexer(CharStream input) {
+		super(input);
+		_interp = new LexerATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
+	}
+
+	@Override
+	public String getGrammarFileName() { return "Scheme.g4"; }
+
+	@Override
+	public String[] getTokenNames() { return tokenNames; }
+
+	@Override
+	public String[] getRuleNames() { return ruleNames; }
+
+	@Override
+	public String getSerializedATN() { return _serializedATN; }
+
+	@Override
+	public String[] getModeNames() { return modeNames; }
+
+	@Override
+	public ATN getATN() { return _ATN; }
+
+	public static final String _serializedATN =
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\2\16\u0098\b\1\4\2"+
+		"\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4"+
+		"\13\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\3\2\7\2#\n\2\f"+
+		"\2\16\2&\13\2\3\3\3\3\3\3\7\3+\n\3\f\3\16\3.\13\3\3\3\3\3\3\3\3\3\3\3"+
+		"\5\3\65\n\3\3\4\3\4\3\4\3\4\7\4;\n\4\f\4\16\4>\13\4\3\4\3\4\3\5\3\5\3"+
+		"\5\3\5\3\5\5\5G\n\5\3\6\3\6\3\7\5\7L\n\7\3\7\6\7O\n\7\r\7\16\7P\3\7\3"+
+		"\7\6\7U\n\7\r\7\16\7V\5\7Y\n\7\3\7\3\7\5\7]\n\7\3\7\6\7`\n\7\r\7\16\7"+
+		"a\5\7d\n\7\3\b\3\b\7\bh\n\b\f\b\16\bk\13\b\3\t\3\t\5\to\n\t\3\n\3\n\5"+
+		"\ns\n\n\3\13\3\13\3\13\3\13\5\13y\n\13\3\f\3\f\3\f\3\f\3\r\3\r\7\r\u0081"+
+		"\n\r\f\r\16\r\u0084\13\r\3\r\3\r\3\16\3\16\3\16\3\16\3\17\3\17\3\17\3"+
+		"\17\3\20\3\20\7\20\u0092\n\20\f\20\16\20\u0095\13\20\3\20\3\20\3\u0082"+
+		"\2\21\3\3\5\4\7\5\t\6\13\2\r\7\17\b\21\2\23\2\25\t\27\n\31\13\33\f\35"+
+		"\r\37\16\3\2\b\4\2--//\4\2GGgg\n\2##&&((,,>AC\\aac|\4\2\60\60\62;\7\2"+
+		"\13\f\17\17\"\"..^^\4\2\f\f\17\17\u00ab\2\3\3\2\2\2\2\5\3\2\2\2\2\7\3"+
+		"\2\2\2\2\t\3\2\2\2\2\r\3\2\2\2\2\17\3\2\2\2\2\25\3\2\2\2\2\27\3\2\2\2"+
+		"\2\31\3\2\2\2\2\33\3\2\2\2\2\35\3\2\2\2\2\37\3\2\2\2\3$\3\2\2\2\5\64\3"+
+		"\2\2\2\7\66\3\2\2\2\tF\3\2\2\2\13H\3\2\2\2\rK\3\2\2\2\17e\3\2\2\2\21n"+
+		"\3\2\2\2\23r\3\2\2\2\25x\3\2\2\2\27z\3\2\2\2\31~\3\2\2\2\33\u0087\3\2"+
+		"\2\2\35\u008b\3\2\2\2\37\u008f\3\2\2\2!#\5\5\3\2\"!\3\2\2\2#&\3\2\2\2"+
+		"$\"\3\2\2\2$%\3\2\2\2%\4\3\2\2\2&$\3\2\2\2\'(\7*\2\2(,\5\17\b\2)+\5\5"+
+		"\3\2*)\3\2\2\2+.\3\2\2\2,*\3\2\2\2,-\3\2\2\2-/\3\2\2\2.,\3\2\2\2/\60\7"+
+		"+\2\2\60\65\3\2\2\2\61\65\5\7\4\2\62\65\5\t\5\2\63\65\5\17\b\2\64\'\3"+
+		"\2\2\2\64\61\3\2\2\2\64\62\3\2\2\2\64\63\3\2\2\2\65\6\3\2\2\2\66\67\7"+
+		")\2\2\678\7*\2\28<\3\2\2\29;\5\5\3\2:9\3\2\2\2;>\3\2\2\2<:\3\2\2\2<=\3"+
+		"\2\2\2=?\3\2\2\2><\3\2\2\2?@\7+\2\2@\b\3\2\2\2AG\5\r\7\2BG\5\33\16\2C"+
+		"G\5\25\13\2DG\5\27\f\2EG\5\31\r\2FA\3\2\2\2FB\3\2\2\2FC\3\2\2\2FD\3\2"+
+		"\2\2FE\3\2\2\2G\n\3\2\2\2HI\t\2\2\2I\f\3\2\2\2JL\5\13\6\2KJ\3\2\2\2KL"+
+		"\3\2\2\2LN\3\2\2\2MO\4\62;\2NM\3\2\2\2OP\3\2\2\2PN\3\2\2\2PQ\3\2\2\2Q"+
+		"X\3\2\2\2RT\7\60\2\2SU\4\62;\2TS\3\2\2\2UV\3\2\2\2VT\3\2\2\2VW\3\2\2\2"+
+		"WY\3\2\2\2XR\3\2\2\2XY\3\2\2\2Yc\3\2\2\2Z\\\t\3\2\2[]\5\13\6\2\\[\3\2"+
+		"\2\2\\]\3\2\2\2]_\3\2\2\2^`\4\62;\2_^\3\2\2\2`a\3\2\2\2a_\3\2\2\2ab\3"+
+		"\2\2\2bd\3\2\2\2cZ\3\2\2\2cd\3\2\2\2d\16\3\2\2\2ei\5\21\t\2fh\5\23\n\2"+
+		"gf\3\2\2\2hk\3\2\2\2ig\3\2\2\2ij\3\2\2\2j\20\3\2\2\2ki\3\2\2\2lo\5\13"+
+		"\6\2mo\t\4\2\2nl\3\2\2\2nm\3\2\2\2o\22\3\2\2\2ps\5\21\t\2qs\t\5\2\2rp"+
+		"\3\2\2\2rq\3\2\2\2s\24\3\2\2\2tu\7%\2\2uy\7v\2\2vw\7%\2\2wy\7h\2\2xt\3"+
+		"\2\2\2xv\3\2\2\2y\26\3\2\2\2z{\7)\2\2{|\13\2\2\2|}\7)\2\2}\30\3\2\2\2"+
+		"~\u0082\7$\2\2\177\u0081\13\2\2\2\u0080\177\3\2\2\2\u0081\u0084\3\2\2"+
+		"\2\u0082\u0083\3\2\2\2\u0082\u0080\3\2\2\2\u0083\u0085\3\2\2\2\u0084\u0082"+
+		"\3\2\2\2\u0085\u0086\7$\2\2\u0086\32\3\2\2\2\u0087\u0088\7p\2\2\u0088"+
+		"\u0089\7k\2\2\u0089\u008a\7n\2\2\u008a\34\3\2\2\2\u008b\u008c\t\6\2\2"+
+		"\u008c\u008d\3\2\2\2\u008d\u008e\b\17\2\2\u008e\36\3\2\2\2\u008f\u0093"+
+		"\7=\2\2\u0090\u0092\n\7\2\2\u0091\u0090\3\2\2\2\u0092\u0095\3\2\2\2\u0093"+
+		"\u0091\3\2\2\2\u0093\u0094\3\2\2\2\u0094\u0096\3\2\2\2\u0095\u0093\3\2"+
+		"\2\2\u0096\u0097\b\20\2\2\u0097 \3\2\2\2\25\2$,\64<FKPVX\\acinrx\u0082"+
+		"\u0093\3\2\3\2";
+	public static final ATN _ATN =
+		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
-		int numStates = DFA12_transitionS.length;
-		DFA12_transition = new short[numStates][];
-		for (int i=0; i<numStates; i++) {
-			DFA12_transition[i] = DFA.unpackEncodedString(DFA12_transitionS[i]);
+		_decisionToDFA = new DFA[_ATN.getNumberOfDecisions()];
+		for (int i = 0; i < _ATN.getNumberOfDecisions(); i++) {
+			_decisionToDFA[i] = new DFA(_ATN.getDecisionState(i), i);
 		}
 	}
-
-	protected class DFA12 extends DFA {
-
-		public DFA12(BaseRecognizer recognizer) {
-			this.recognizer = recognizer;
-			this.decisionNumber = 12;
-			this.eot = DFA12_eot;
-			this.eof = DFA12_eof;
-			this.min = DFA12_min;
-			this.max = DFA12_max;
-			this.accept = DFA12_accept;
-			this.special = DFA12_special;
-			this.transition = DFA12_transition;
-		}
-		@Override
-		public String getDescription() {
-			return "1:1: Tokens : ( NIL | T__20 | T__21 | T__22 | T__23 | WS | COMMENT | NUMBER | ID | BOOLEAN | CHAR | STRING );";
-		}
-		@Override
-		public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
-			IntStream input = _input;
-			int _s = s;
-			switch ( s ) {
-					case 0 : 
-						int LA12_4 = input.LA(1);
-						s = -1;
-						if ( (LA12_4=='(') ) {s = 14;}
-						else if ( ((LA12_4 >= '\u0000' && LA12_4 <= '\'')||(LA12_4 >= ')' && LA12_4 <= '\uFFFF')) ) {s = 15;}
-						if ( s>=0 ) return s;
-						break;
-			}
-			NoViableAltException nvae =
-				new NoViableAltException(getDescription(), 12, _s, input);
-			error(nvae);
-			throw nvae;
-		}
-	}
-
 }
