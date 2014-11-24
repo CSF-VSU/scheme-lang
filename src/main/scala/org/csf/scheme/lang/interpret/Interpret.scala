@@ -5,4 +5,8 @@ package org.csf.scheme.lang.interpret
  */
 class Interpret {
 
+  def interpret(environment: Environment): Unit = {
+    // todo
+  }
+
 }
