@@ -3,11 +3,9 @@ package org.csf.scheme.lang.util;
 import org.antlr.runtime.tree.Tree;
 import org.csf.scheme.lang.antlr.SchemeParser;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.lang.reflect.Field;
 import java.util.*;
 
 /**
