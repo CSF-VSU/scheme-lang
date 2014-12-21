@@ -1,4 +1,6 @@
-// $ANTLR 3.5.2 src/main/antlr/Scheme.g 2014-12-21 17:21:49
+// $ANTLR 3.5.2 src/main/antlr/Scheme.g 2014-12-21 18:15:50
+
+package org.csf.scheme.lang.antlr;
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -349,7 +351,7 @@ public class SchemeLexer extends Lexer {
 				}
 			}
 
-			if (getText() == '.')  _type = DOT;
+			if (getText() == ".")  _type = DOT;
 			}
 
 			state.type = _type;
