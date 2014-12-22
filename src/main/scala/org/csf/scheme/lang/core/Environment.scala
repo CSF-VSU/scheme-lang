@@ -5,6 +5,14 @@ package org.csf.scheme.lang.core
  */
 class Environment {
 
-  val functions: Seq[SFunction] = null
+  val functions: Map[String, SFunction[Type]] = Predefined.functions(this)
+
+}
+
+object Environment {
+
+  def apply(): Environment = {
+    new Environment()
+  }
 
 }

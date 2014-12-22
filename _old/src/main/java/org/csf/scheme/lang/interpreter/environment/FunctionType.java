@@ -1,4 +1,4 @@
-package org.csf.scheme.lang.interpreter.environment;
+package org.csf.scheme.lang.interpret.environment;
 
 /**
  * Created by agpopikov on 20/10/14.

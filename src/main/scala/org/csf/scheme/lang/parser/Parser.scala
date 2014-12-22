@@ -17,7 +17,7 @@ class Parser(val source: String) {
   private val inputStream: InputStream = new ByteArrayInputStream(source.getBytes(StandardCharsets.UTF_8))
   private val lexer = new SchemeLexer(new ANTLRInputStream(inputStream))
   private val parser = new SchemeParser(new CommonTokenStream(lexer))
-  private val tree = parser.sexpr().getTree
+  private val tree = parser.program().getTree.asInstanceOf[Tree]
 
   def getTree: Tree = {
     tree

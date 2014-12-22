@@ -9,17 +9,26 @@ import org.csf.scheme.lang.core.MathOperations.MathOperations
  */
 class Predefined(val environment: Environment) {
 
-  def define(params: Seq[Type]): Type = null
+  def define()(params: Seq[Type]): Type = {
+    if ((params.length == 2) && params(0).isInstanceOf[SIdent] && params(1).isInstanceOf[SFunction[Type]]) {
+      val ident = params(0).asInstanceOf[SIdent]
+      val function = params(1).asInstanceOf[SFunction[Type]]
+      environment.functions + (ident.name -> function)
+      new SNone
+    } else {
+      throw new InvalidArgumentException(Array(""))
+    }
+  }
 
-  def math(operation: MathOperations, params: Seq[Type]): Type = {
+  def math(operation: MathOperations)(params: Seq[Type]): Type = {
     if (params.forall(_.isInstanceOf[SNumber])) {
-      new SNumber(params.map(_.asInstanceOf[SNumber].value).reduce((a,b) => {
+      new SNumber(params.map(_.asInstanceOf[SNumber].value).reduce((a, b) => {
         operation match {
-          case MathOperations.Sum => a + b
-          case MathOperations.Sub => a - b
-          case MathOperations.Mul => a * b
-          case MathOperations.Div => a / b
-          case MathOperations.Mod => a % b
+          case MathOperations.add => a + b
+          case MathOperations.sub => a - b
+          case MathOperations.mul => a * b
+          case MathOperations.div => a / b
+          case MathOperations.mod => a % b
         }
       }))
     } else {
@@ -28,7 +37,7 @@ class Predefined(val environment: Environment) {
     }
   }
 
-  def map(params: Seq[Type]): Type = {
+  def map()(params: Seq[Type]): Type = {
     if ((params.length == 2) && params(0).isInstanceOf[SFunction[Type]] && params(1).isInstanceOf[SList]) {
       val function = params(0).asInstanceOf[SFunction[Type]]
       val list = params(1).asInstanceOf[SList]
@@ -38,7 +47,7 @@ class Predefined(val environment: Environment) {
     }
   }
 
-  def filter(params: Seq[Type]): Type = {
+  def filter()(params: Seq[Type]): Type = {
     if ((params.length == 2) && params(0).isInstanceOf[SFunction[SBoolean]] && params(1).isInstanceOf[SList]) {
       val predicate = params(0).asInstanceOf[SFunction[SBoolean]]
       val list = params(1).asInstanceOf[SList]
@@ -48,21 +57,22 @@ class Predefined(val environment: Environment) {
     }
   }
 
-  def reduce(params: Seq[Type]): Type = {
+  def reduce()(params: Seq[Type]): Type = {
     if (params.length == 2 && params(0).isInstanceOf[SFunction[Type]] && params.isInstanceOf[SList]) {
-      val function = params(0).asInstanceOf[SFunction[Type]]
+      val function: SFunction[Type] = params(0).asInstanceOf[SFunction[Type]]
       val list = params(1).asInstanceOf[SList]
-      new SList(list.value.reduce((a, b) => Seq(function(Seq(a, b)))))
+      // new SList(list.value.reduce((a, b) => function(Seq(a, b))))
+      new SNone
     } else {
       throw new InvalidArgumentException(Array(""))
     }
   }
 
-  def list(params: Seq[Type]): Type = {
+  def list()(params: Seq[Type]): Type = {
     new SList(params)
   }
 
-  def isType[T](params: Seq[Type]): Type = {
+  def isType[T]()(params: Seq[Type]): Type = {
     if (params.length == 1) {
       new SBoolean(params(0).isInstanceOf[T])
     } else {
@@ -70,7 +80,7 @@ class Predefined(val environment: Environment) {
     }
   }
 
-  def boolean(operation: BooleanOperations, params: Seq[Type]): Type = {
+  def boolean(operation: BooleanOperations)(params: Seq[Type]): Type = {
     if (params.forall(_.isInstanceOf[SBoolean])) {
       if (operation != BooleanOperations.not) {
         new SBoolean(params.map(_.asInstanceOf[SBoolean].value).reduce((a, b) => {
@@ -96,12 +106,34 @@ object Predefined {
     new Predefined(environment)
   }
 
+  def functions(environment: Environment): Map[String, SFunction[Type]] = {
+    val predefined = new Predefined(environment)
+    Map {
+      "+" -> predefined.math(MathOperations.add)_
+      "-" -> predefined.math(MathOperations.sub)_
+      "*" -> predefined.math(MathOperations.mul)_
+      "/" -> predefined.math(MathOperations.div)_
+      "%" -> predefined.math(MathOperations.mod)_
+      "define" -> predefined.define()_
+      "filter" -> predefined.filter()_
+      "reduce" -> predefined.reduce()_
+      "map" -> predefined.map()_
+      "list" -> predefined.list()_
+      "and" -> predefined.boolean(BooleanOperations.and)_
+      "or" -> predefined.boolean(BooleanOperations.or)_
+      "not" -> predefined.boolean(BooleanOperations.not)_
+      "number?" -> predefined.isType[SNumber]()_
+      "string?" -> predefined.isType[SString]()_
+      "function?" -> predefined.isType[SFunction[Type]]()_
+    }.mapValues(new SFunction(_))
+  }
+
 }
 
 object MathOperations extends Enumeration {
 
   type MathOperations = Value
-  val Sum, Sub, Mul, Div, Mod = Value
+  val add, sub, mul, div, mod = Value
 
 }
 

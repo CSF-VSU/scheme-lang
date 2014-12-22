@@ -7,6 +7,10 @@ trait Type {
 
 }
 
+class SIdent(val name: String) extends Type {
+
+}
+
 class SNumber(val value: Double) extends Type {
 
   implicit def toSString: SString = {

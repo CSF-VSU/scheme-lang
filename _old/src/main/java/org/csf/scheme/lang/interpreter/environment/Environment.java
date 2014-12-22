@@ -1,9 +1,9 @@
-package org.csf.scheme.lang.interpreter.environment;
+package org.csf.scheme.lang.interpret.environment;
 
 import org.antlr.runtime.tree.Tree;
-import org.csf.scheme.lang.interpreter.InterpretException;
-import org.csf.scheme.lang.interpreter.environment.function.DefineFunction;
-import org.csf.scheme.lang.interpreter.environment.function.MathFunction;
+import org.csf.scheme.lang.interpret.InterpretException;
+import org.csf.scheme.lang.interpret.environment.function.DefineFunction;
+import org.csf.scheme.lang.interpret.environment.function.MathFunction;
 
 import java.util.ArrayList;
 import java.util.List;

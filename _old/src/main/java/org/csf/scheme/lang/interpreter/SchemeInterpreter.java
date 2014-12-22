@@ -1,7 +1,7 @@
-package org.csf.scheme.lang.interpreter;
+package org.csf.scheme.lang.interpret;
 
 import org.antlr.runtime.tree.Tree;
-import org.csf.scheme.lang.interpreter.environment.Environment;
+import org.csf.scheme.lang.interpret.environment.Environment;
 
 /**
  * Created by agpopikov on 20/10/14.

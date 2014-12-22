@@ -7,7 +7,7 @@ import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.tree.Tree;
 import org.csf.scheme.lang.antlr.SchemeLexer;
 import org.csf.scheme.lang.antlr.SchemeParser;
-import org.csf.scheme.lang.interpreter.SchemeInterpreter;
+import org.csf.scheme.lang.interpret.SchemeInterpreter;
 
 import java.io.File;
 import java.io.FileInputStream;

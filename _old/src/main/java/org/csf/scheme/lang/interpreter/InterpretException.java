@@ -1,4 +1,4 @@
-package org.csf.scheme.lang.interpreter;
+package org.csf.scheme.lang.interpret;
 
 /**
  * Created by agpopikov on 20/10/14.

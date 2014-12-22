@@ -1,57 +1,77 @@
 grammar Scheme;
 
 options {
-	language=Java;
-	output=AST;
-	ASTLabelType=CommonTree;
+  output=AST;
+
+  backtrack=true;
+  //memoize=true;
 }
+
 
 tokens {
-	LPAREN='(';
-	RPAREN=')';
-	DOT;
+  NIL='nil';
+  LIST;
+  LAMBDA;
+  ARGS;
+  BODY;
+  PROGRAM;
 }
 
-@package {org.csf.scheme.lang.antlr}
-@lexer::package {org.csf.scheme.lang.antlr}
+@header {
+    package org.csf.scheme.lang.antlr;
+}
+
+@lexer::header {
+    package org.csf.scheme.lang.antlr;
+}
 
 
-sexpr
-	: item* EOF
-	;
-item
-	: atom
-	| (list) => list
-	| LPAREN item DOT item RPAREN
-	;
-list
-	: LPAREN item* RPAREN
-	;
-atom
-	: STRING | SYMBOL | NUMBER | DOT
-	;
-	
-STRING
-	:'"' ( '\\' . | ~('\\'|'"') )* '"'
-	;
-WHITESPACE
-	: (' ' | '\n' | '\t' | '\r')+ 
-		{skip();}
-	;
-NUMBER
-	: ('+' | '-')? (DIGIT)+ ('.' (DIGIT)+)?
-	;
-SYMBOL
-	: SYMBOL_START (SYMBOL_START | DIGIT)*  {if ($text == '.')  $type = DOT;}
-	;
+WS : (' '|'\n'|'\r'|'\t') {$channel=HIDDEN;} ;
+
+program : (expression)* -> ^(PROGRAM (expression)*);
+
+expression : '('! ID^ (arg)* ')'! ;
+
+arg
+  : lambda
+  | expression
+  | list
+  | ID
+  | literal
+  ;
+
+lambda : '(' 'lambda'  '(' ID* ')' arg ')'  -> ^(LAMBDA ^(ARGS ID*) ^(BODY arg));
+
+list : '\'(' arg* ')' -> ^(LIST arg*);
+
+literal
+  : NUMBER
+  | NIL
+  | BOOLEAN
+  | CHAR
+  | STRING
+  ;
 
 fragment
-SYMBOL_START 
-	: ('a'..'z') | ('A'..'Z') 
-	| '+' | '-' | '*' | '/' 
-	| '.'
-	;
+SIGN : '+' | '-';
+
+NUMBER : SIGN? ('0'..'9')+ ('.' ('0'..'9')+)? (('e' | 'E') SIGN? ('0'..'9')+)? ;
+
+ID : SYMBOL_HEAD SYMBOL_REST*;
+
 fragment
-DIGIT
-	: ('0'..'9')
-	;
+SYMBOL_HEAD
+    : SIGN | 'a'..'z' | 'A'..'Z' | '*' | '!'  | '_' | '?' | '>' | '<' | '=' | '$' | '&' ;
+
+fragment
+SYMBOL_REST
+    : SYMBOL_HEAD
+    | '0'..'9'
+    | '.'
+    ;
+
+BOOLEAN : '#t' | '#f';
+
+CHAR : '\'' . '\'';
+
+STRING : '\"' . * '\"';
