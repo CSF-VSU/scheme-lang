@@ -8,6 +8,7 @@ import org.antlr.runtime.tree.Tree
 object TreeUtils {
 
   def getTreeChildren(tree: Tree): Seq[Tree] = {
+    var i: Int = 0
     for (i <- 0 until tree.getChildCount)
       yield tree.getChild(i)
   }

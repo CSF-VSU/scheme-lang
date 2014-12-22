@@ -4,16 +4,22 @@ import com.sun.javaws.exceptions.InvalidArgumentException
 import org.csf.scheme.lang.core.BooleanOperations.BooleanOperations
 import org.csf.scheme.lang.core.MathOperations.MathOperations
 
+import scala.collection.mutable
+
 /**
  * Created by agpopikov on 21/12/14
  */
 class Predefined(val environment: Environment) {
 
   def define()(params: Seq[Type]): Type = {
-    if ((params.length == 2) && params(0).isInstanceOf[SIdent] && params(1).isInstanceOf[SFunction[Type]]) {
+    if ((params.length == 2) && params(0).isInstanceOf[SIdent]) {
       val ident = params(0).asInstanceOf[SIdent]
-      val function = params(1).asInstanceOf[SFunction[Type]]
-      environment.functions + (ident.name -> function)
+      val function = params(1)
+      if (function.isInstanceOf[SFunction[Type]]) {
+        environment.functions += (ident.name -> function.asInstanceOf[SFunction[Type]])
+      } else {
+        environment.functions += (ident.name -> new SFunction[Type](p => function))
+      }
       new SNone
     } else {
       throw new InvalidArgumentException(Array(""))
@@ -108,24 +114,24 @@ object Predefined {
 
   def functions(environment: Environment): Map[String, SFunction[Type]] = {
     val predefined = new Predefined(environment)
-    Map {
-      "+" -> predefined.math(MathOperations.add)_
-      "-" -> predefined.math(MathOperations.sub)_
-      "*" -> predefined.math(MathOperations.mul)_
-      "/" -> predefined.math(MathOperations.div)_
-      "%" -> predefined.math(MathOperations.mod)_
-      "define" -> predefined.define()_
-      "filter" -> predefined.filter()_
-      "reduce" -> predefined.reduce()_
-      "map" -> predefined.map()_
-      "list" -> predefined.list()_
-      "and" -> predefined.boolean(BooleanOperations.and)_
-      "or" -> predefined.boolean(BooleanOperations.or)_
-      "not" -> predefined.boolean(BooleanOperations.not)_
-      "number?" -> predefined.isType[SNumber]()_
-      "string?" -> predefined.isType[SString]()_
+    Map (
+      "+" -> predefined.math(MathOperations.add)_,
+      "-" -> predefined.math(MathOperations.sub)_,
+      "*" -> predefined.math(MathOperations.mul)_,
+      "/" -> predefined.math(MathOperations.div)_,
+      "%" -> predefined.math(MathOperations.mod)_,
+      "define" -> predefined.define()_,
+      "filter" -> predefined.filter()_,
+      "reduce" -> predefined.reduce()_,
+      "map" -> predefined.map()_,
+      "list" -> predefined.list()_,
+      "and" -> predefined.boolean(BooleanOperations.and)_,
+      "or" -> predefined.boolean(BooleanOperations.or)_,
+      "not" -> predefined.boolean(BooleanOperations.not)_,
+      "number?" -> predefined.isType[SNumber]()_,
+      "string?" -> predefined.isType[SString]()_,
       "function?" -> predefined.isType[SFunction[Type]]()_
-    }.mapValues(new SFunction(_))
+    ).mapValues(new SFunction(_))
   }
 
 }
