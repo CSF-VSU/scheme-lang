@@ -9,7 +9,7 @@ import org.csf.scheme.lang.parser.Parser
  */
 object Test extends App {
 
-  val source = "(define a 1) (+ 1 2 (* 4 5)) (+ a 2)"
+  val source = "(define abs (lambda (x) (* x x)))"
   val tree = Parser(source).getTree
   val children = TreeUtils.getTreeChildren(tree)
   val interpret = new Interpret()

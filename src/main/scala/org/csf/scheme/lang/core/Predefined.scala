@@ -15,10 +15,11 @@ class Predefined(val environment: Environment) {
     if ((params.length == 2) && params(0).isInstanceOf[SIdent]) {
       val ident = params(0).asInstanceOf[SIdent]
       val function = params(1)
-      if (function.isInstanceOf[SFunction[Type]]) {
-        environment.functions += (ident.name -> function.asInstanceOf[SFunction[Type]])
-      } else {
-        environment.functions += (ident.name -> new SFunction[Type](p => function))
+      function match {
+        case target: SFunction[Type] =>
+          environment.functions += (ident.name -> target)
+        case _ =>
+          environment.functions += (ident.name -> new SFunction[Type](p => function))
       }
       new SNone
     } else {

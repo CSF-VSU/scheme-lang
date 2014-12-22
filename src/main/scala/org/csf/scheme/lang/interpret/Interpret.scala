@@ -23,10 +23,10 @@ class Interpret {
   }
 
   private def eval(tree: Tree): Type = {
-    val operation = parseValue(tree.getType, tree.getText).asInstanceOf[SIdent]
+    val operation = parseValue(tree).asInstanceOf[SIdent]
     val params = mutable.MutableList[Type]()
     for (child <- TreeUtils.getTreeChildren(tree)) {
-      val param = parseValue(child.getType, child.getText)
+      val param = parseValue(tree)
       if (param.isInstanceOf[SIdent] && (!operation.isDefine)) {
         params += eval(child)
       } else {
@@ -36,16 +36,22 @@ class Interpret {
     environment.eval(operation, params)
   }
 
-  private def parseValue(lexerType: Int, value: String): Type = {
+  private def parseValue(tree: Tree): Type = {
+    val value = tree.getText
+    val lexerType = tree.getType
     lexerType match {
       case SchemeLexer.NUMBER => new SNumber(value.toDouble)
       case SchemeLexer.STRING => new SString(value)
       case SchemeLexer.ID => new SIdent(value)
       case SchemeLexer.BOOLEAN => new SBoolean(value.toBoolean)
+      case SchemeLexer.LAMBDA => parseFunction(tree)
     }
   }
 
   private def parseFunction(tree: Tree): SFunction[Type] = {
+    val lambda = TreeUtils.getTreeChildren(tree)
+    val args = lambda(0)
+    val body = lambda(1)
     null
   }
 
