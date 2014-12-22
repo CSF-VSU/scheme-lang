@@ -1,5 +1,8 @@
 package org.csf.scheme.lang.core
 
+import org.antlr.runtime.tree.Tree
+import org.csf.scheme.lang.util.TreeUtils
+
 /**
  * Created by agpopikov on 21/12/14.
  */
@@ -38,6 +41,8 @@ class SString(val value: String) extends Type {
 }
 
 class SFunction[T](val value: Seq[Type] => T) extends Type {
+
+  var implicitParams: Seq[SIdent] = Seq[SIdent]()
 
   def apply(params: Seq[Type]): T = {
     value(params)

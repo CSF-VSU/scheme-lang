@@ -2,6 +2,7 @@ package org.csf.scheme.lang.core
 
 import com.sun.javaws.exceptions.InvalidArgumentException
 import org.csf.scheme.lang.core.BooleanOperations.BooleanOperations
+import org.csf.scheme.lang.core.ComparisonOperations.ComparisonOperations
 import org.csf.scheme.lang.core.MathOperations.MathOperations
 
 import scala.collection.mutable
@@ -75,6 +76,24 @@ class Predefined(val environment: Environment) {
     }
   }
 
+  def ifStatement()(params: Seq[Type]): Type = {
+    if ((params.length == 3) && params(0).isInstanceOf[SBoolean] && params(1).isInstanceOf[SNumber] &&
+          params(2).isInstanceOf[SNumber]) {
+      val function1 = params(1).asInstanceOf[SNumber]
+      val function2 = params(2).asInstanceOf[SNumber]
+      val statement = params(0).asInstanceOf[SBoolean]
+      if (statement.value) {
+        function1
+      } else {
+        function2
+      }
+    } else {
+      throw new InvalidArgumentException(Array(""))
+    }
+  }
+
+
+
   def list()(params: Seq[Type]): Type = {
     new SList(params)
   }
@@ -105,6 +124,22 @@ class Predefined(val environment: Environment) {
     }
   }
 
+  def comparison(operation: ComparisonOperations)(params: Seq[Type]): Type = {
+    if (params.length == 2 && params.forall(_.isInstanceOf[SNumber])) {
+      val a = params(0).asInstanceOf[SNumber].value
+      val b = params(1).asInstanceOf[SNumber].value
+      new SBoolean(operation match {
+          case ComparisonOperations.eq => a == b
+          case ComparisonOperations.lt => a < b
+          case ComparisonOperations.lte => a <= b
+          case ComparisonOperations.gt => a > b
+          case ComparisonOperations.gte => a >= b
+      })
+    } else {
+      throw new InvalidArgumentException(Array())
+    }
+  }
+
 }
 
 object Predefined {
@@ -129,6 +164,12 @@ object Predefined {
       "and" -> predefined.boolean(BooleanOperations.and)_,
       "or" -> predefined.boolean(BooleanOperations.or)_,
       "not" -> predefined.boolean(BooleanOperations.not)_,
+      "if" -> predefined.ifStatement()_,
+      "=" -> predefined.comparison(ComparisonOperations.eq)_,
+      ">" -> predefined.comparison(ComparisonOperations.gt)_,
+      ">=" -> predefined.comparison(ComparisonOperations.gte)_,
+      "<" -> predefined.comparison(ComparisonOperations.lt)_,
+      "<=" -> predefined.comparison(ComparisonOperations.lte)_,
       "number?" -> predefined.isType[SNumber]()_,
       "string?" -> predefined.isType[SString]()_,
       "function?" -> predefined.isType[SFunction[Type]]()_
@@ -147,6 +188,13 @@ object MathOperations extends Enumeration {
 object BooleanOperations extends Enumeration {
 
   type BooleanOperations = Value
-  val and, or, not = Value
+  val and, or, not  = Value
+
+}
+
+object ComparisonOperations extends Enumeration {
+
+  type ComparisonOperations = Value
+  val eq, lt, lte, gt, gte = Value
 
 }
