@@ -71,7 +71,9 @@ class SChar(val value: Char) extends Type {
 }
 
 class SNone extends Type {
-  s"None"
+
+  override def toString: String = s"None"
+
 }
 
 class SBoolean(val value: Boolean) extends Type {

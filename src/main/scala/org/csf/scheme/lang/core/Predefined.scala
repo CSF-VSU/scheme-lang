@@ -140,6 +140,20 @@ class Predefined(val environment: Environment) {
     }
   }
 
+  def write()(params: Seq[Type]): Type = {
+    for (param <- params) {
+      print(param)
+    }
+    new SNone
+  }
+
+  def writeln()(params: Seq[Type]): Type = {
+    for (param <- params) {
+      println(param)
+    }
+    new SNone
+  }
+
 }
 
 object Predefined {
@@ -164,7 +178,6 @@ object Predefined {
       "and" -> predefined.boolean(BooleanOperations.and)_,
       "or" -> predefined.boolean(BooleanOperations.or)_,
       "not" -> predefined.boolean(BooleanOperations.not)_,
-      "if" -> predefined.ifStatement()_,
       "=" -> predefined.comparison(ComparisonOperations.eq)_,
       ">" -> predefined.comparison(ComparisonOperations.gt)_,
       ">=" -> predefined.comparison(ComparisonOperations.gte)_,
@@ -172,7 +185,9 @@ object Predefined {
       "<=" -> predefined.comparison(ComparisonOperations.lte)_,
       "number?" -> predefined.isType[SNumber]()_,
       "string?" -> predefined.isType[SString]()_,
-      "function?" -> predefined.isType[SFunction[Type]]()_
+      "function?" -> predefined.isType[SFunction[Type]]()_,
+      "write" -> predefined.write()_,
+      "writeln" -> predefined.writeln()_
     ).mapValues(new SFunction(_))
   }
 

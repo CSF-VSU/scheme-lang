@@ -22,47 +22,40 @@ class Interpret {
     }
   }
 
-  def buildMainSection(source: String): String = {
-    var result = "object Program extends App {\n"
-    result += "val environment = Environment()"
-    result += s"val tree = Parser($source).getTree"
-    result += s"for (child <- TreeUtils.getTreeChildren(tree)) {  println(eval(child)) \n }"
-    result += "private def eval(tree: Tree): Type = {\n    " +
-      "val operation = parseValue(tree).asInstanceOf[SIdent]\n    " +
-      "val params = mutable.MutableList[Type]()\n    " +
-      "for (child <- TreeUtils.getTreeChildren(tree)) {\n      " +
-      "val param = parseValue(child)\n      " +
-      "if (param.isInstanceOf[SIdent] && (!operation.isDefine)) {\n        " +
-      "params += eval(child)\n      } else {\n        " +
-      "params += param\n      }\n    }\n    " +
-      "environment.eval(operation, params)\n  }\n"
-    result += "eval(tree)"
-    result += "\n}"
-    result
+  def build(source: String): String = {
+    val header =
+      """import Environment
+
+         object SchemeApp extends App {
+            val environment = Environment()
+
+      """.stripMargin
+    //
+    val footer =
+      """
+
+        }
+      """.stripMargin
+    //
+    val tree = Parser(source).getTree
+    val output = (for (child <- TreeUtils.getTreeChildren(tree))
+                      yield buildTree(child)).reduce((a, b) => s"$a\n$b")
+    //
+    s"$header\n$output\n$footer"
   }
 
-  var functions = Seq[String]()
-  var number = 0
-
-  def build(tree: Tree): String = {
-    val children = TreeUtils.getTreeChildren(tree)
-    val operation = parseValue(tree).asInstanceOf[SIdent]
-    val params = mutable.MutableList[Type]()
+  private def buildTree(tree: Tree): String = {
+    val operation = generateValue(tree)
+    val params = mutable.MutableList[String]()
     for (child <- TreeUtils.getTreeChildren(tree)) {
-      val param = parseValue(child)
-      if (param.isInstanceOf[SIdent] && (!operation.isDefine)) {
-        params += eval(child)
+      if (parseValue(child).isInstanceOf[SIdent] && (!parseValue(tree).asInstanceOf[SIdent].isDefine)) {
+        params += buildTree(child)
       } else {
-        params += param
+        params += generateValue(child)
       }
     }
-
-    def generateParamsString: Seq[String] = {
-      for (param <- params if param.isInstanceOf[SNumber])
-        yield s"new SNumber(${param.asInstanceOf[SNumber].value})"
-    }
-    val p = generateParamsString.reduce((a,b) => a + "," + b)
-    "environment.eval(new SIdent(\"" + operation + "\"), $p)"
+    val output = if (params.length > 0) params.reduce((a, b) => s"$a, $b") else ""
+    s"environment.eval($operation, Seq($output))"
   }
 
   private def eval(tree: Tree): Type = {
@@ -77,6 +70,17 @@ class Interpret {
       }
     }
     environment.eval(operation, params)
+  }
+
+  private def generateValue(tree: Tree): String = {
+    val value = tree.getText
+    val lexerType = tree.getType
+    lexerType match {
+      case SchemeLexer.NUMBER => s"new SNumber($value)"
+      case SchemeLexer.STRING => "new SString(\"" + value + "\")"
+      case SchemeLexer.ID => "new SIdent(\"" + value + "\")"
+      case SchemeLexer.BOOLEAN => s"new SBoolean($value)"
+    }
   }
 
   private def parseValue(tree: Tree): Type = {
