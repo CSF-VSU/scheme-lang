@@ -1,26 +1,34 @@
 package org.csf.scheme.lang.util
 
-import java.io.File
-import java.nio.charset.StandardCharsets
-import java.nio.file.{Paths, Path, Files}
-
-import org.csf.scheme.lang.core.SNumber
 import org.csf.scheme.lang.interpret.Interpret
-import org.csf.scheme.lang.parser.Parser
-
-import scala.io.Source
 
 /**
  * Created by agpopikov on 22/12/14.
  */
 object Test extends App {
 
-//  val source = "(define abs (lambda (x) (if (> x 0) x (* x -1)))) (abs 10) (abs -10) (define a 1) (define b 10) (+ a b)"
-  val source = "(define a 1) (define b 2) (writeln (+ a b (* b 2)))"
-  // val source = "(+ 1 2 3 (* 2 10))"
-  val tree = Parser(source).getTree
-  val children = TreeUtils.getTreeChildren(tree)
+  val source =
+    """
+      (define (bubble-up L)
+          (if (null? (cdr L))
+              L
+              (if (< (car L) (cadr L))
+                  (cons (car L) (bubble-up (cdr L)))
+                  (cons (cadr L) (bubble-up (cons (car L) (cddr L)))))))
+
+      (define (bubble-sort-aux N L)
+          (cond ((= N 1) (bubble-up L))
+                (else (bubble-sort-aux (- N 1) (bubble-up L)))))
+
+      (define (bubbleH L)
+          (bubble-sort-aux (length L) L))
+
+      (write (bubbleH '(5 10 9 8 7)))
+      (newline)
+
+      (define fact (lambda (x) (if (= x 1) 1 (* x (fact (- x 1))))))
+      (write (fact 10))
+    """.stripMargin
   val interpret = new Interpret()
-  println(interpret.build(source))
-  // Files.write(Paths.get("Temp.scala"), generated.getBytes(StandardCharsets.UTF_8))
+  interpret.interpret(source)
 }

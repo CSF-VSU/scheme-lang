@@ -1,10 +1,15 @@
 package org.csf.scheme.lang.interpret
 
+import java.nio.charset.StandardCharsets
+import java.nio.file.{Files, Paths}
+
 import org.antlr.runtime.tree.Tree
 import org.csf.scheme.lang.antlr.SchemeLexer
 import org.csf.scheme.lang.core._
 import org.csf.scheme.lang.parser.Parser
 import org.csf.scheme.lang.util.TreeUtils
+import scala.sys.process._
+
 
 import scala.collection.mutable
 
@@ -16,13 +21,15 @@ class Interpret {
   val environment = Environment()
 
   def interpret(source: String): Unit = {
-    val tree = Parser(source).getTree
-    for (child <- TreeUtils.getTreeChildren(tree)) {
-      println(eval(child))
-    }
+    run(source)
+    //val tree = Parser(source).getTree
+    // for (child <- TreeUtils.getTreeChildren(tree)) {
+      //println(eval(child))
+    //}
   }
 
   def build(source: String): String = {
+
     val header =
       """import Environment
 
@@ -126,6 +133,15 @@ class Interpret {
       environment.eval(operation, params)
     }
     evalWithTree(body)
+  }
+
+  def run(source: String): Unit = {
+    Files.write(Paths.get("file.scm"), source.getBytes(StandardCharsets.UTF_8))
+    val logger = ProcessLogger(
+      (o: String) => println(o),
+      (e: String) => println(e)
+    )
+    val process = ("gsi file.scm") ! logger
   }
 
 }
