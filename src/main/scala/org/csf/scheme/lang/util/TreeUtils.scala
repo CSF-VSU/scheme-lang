@@ -13,4 +13,6 @@ object TreeUtils {
       yield tree.getChild(i)
   }
 
+  implicit def treeToSubtrees(tree: Tree): Seq[Tree] = getTreeChildren(tree)
+
 }

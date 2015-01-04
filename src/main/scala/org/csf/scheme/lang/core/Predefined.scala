@@ -9,6 +9,4 @@ class Predefined {
 
 object Predefined {
 
-
-
 }
